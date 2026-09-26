@@ -1,0 +1,137 @@
+#include <stdio.h>
+
+#define SIZE 11
+
+int hashFunction(int key)
+{
+    return key % SIZE;
+}
+
+void insert(int hashTable[], int key)
+{
+    int index = hashFunction(key);
+    int originalIndex = index;
+
+    while (hashTable[index] != -1)
+    {
+        index = (index + 1) % SIZE;
+
+        if (index == originalIndex)
+        {
+            printf("Hash table is full.\n");
+            return;
+        }
+    }
+
+    hashTable[index] = key;
+}
+
+int hashSearch(int hashTable[], int key, int *operations)
+{
+    int index = hashFunction(key);
+    int originalIndex = index;
+
+    *operations = 0;
+
+    while (hashTable[index] != -1)
+    {
+        (*operations)++;
+
+        if (hashTable[index] == key)
+            return index;
+
+        index = (index + 1) % SIZE;
+
+        if (index == originalIndex)
+            break;
+    }
+
+    return -1;
+}
+
+int linearSearch(int arr[], int n, int key, int *comparisons)
+{
+    *comparisons = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        (*comparisons)++;
+
+        if (arr[i] == key)
+            return i;
+    }
+
+    return -1;
+}
+
+void display(int hashTable[])
+{
+    printf("\nHash Table:\n");
+
+    for (int i = 0; i < SIZE; i++)
+    {
+        if (hashTable[i] == -1)
+            printf("Index %d : EMPTY\n", i);
+        else
+            printf("Index %d : %d\n", i, hashTable[i]);
+    }
+}
+
+int main()
+{
+    int songs[] = {105, 210, 315, 420,
+                   525, 630, 735, 840};
+
+    int n = 8;
+    int hashTable[SIZE];
+
+    for (int i = 0; i < SIZE; i++)
+        hashTable[i] = -1;
+
+    printf("Insertion using Division Method\n");
+
+    for (int i = 0; i < n; i++)
+    {
+        printf("\nInserting %d\n", songs[i]);
+
+        printf("Hash value = %d %% %d = %d\n",
+               songs[i], SIZE, hashFunction(songs[i]));
+
+        insert(hashTable, songs[i]);
+        display(hashTable);
+    }
+
+    int keys[] = {105, 525, 840, 999};
+
+    printf("\nSearch Results\n");
+
+    for (int i = 0; i < 4; i++)
+    {
+        int hashOperations;
+        int linearComparisons;
+
+        int hashResult =
+            hashSearch(hashTable, keys[i], &hashOperations);
+
+        int linearResult =
+            linearSearch(songs, n, keys[i], &linearComparisons);
+
+        printf("\nKey: %d\n", keys[i]);
+
+        if (hashResult != -1)
+            printf("Hashing: Found at index %d, Operations = %d\n",
+                   hashResult, hashOperations);
+        else
+            printf("Hashing: Not Found, Operations = %d\n",
+                   hashOperations);
+
+        if (linearResult != -1)
+            printf("Linear Search: Found at position %d, Comparisons = %d\n",
+                   linearResult + 1, linearComparisons);
+        else
+            printf("Linear Search: Not Found, Comparisons = %d\n",
+                   linearComparisons);
+    }
+
+    return 0;
+}
