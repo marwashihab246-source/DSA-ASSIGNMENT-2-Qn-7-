@@ -1,0 +1,59 @@
+Insertion using Division Method
+
+Inserting 105
+Hash value = 105 % 11 = 6
+
+Inserting 210
+Hash value = 210 % 11 = 1
+
+Inserting 315
+Hash value = 315 % 11 = 7
+
+Inserting 420
+Hash value = 420 % 11 = 2
+
+Inserting 525
+Hash value = 525 % 11 = 8
+
+Inserting 630
+Hash value = 630 % 11 = 3
+
+Inserting 735
+Hash value = 735 % 11 = 9
+
+Inserting 840
+Hash value = 840 % 11 = 4
+
+
+Final Hash Table:
+
+Index 0 : EMPTY
+Index 1 : 210
+Index 2 : 420
+Index 3 : 630
+Index 4 : 840
+Index 5 : EMPTY
+Index 6 : 105
+Index 7 : 315
+Index 8 : 525
+Index 9 : 735
+Index 10 : EMPTY
+
+
+Search Results
+
+Key: 105
+Hashing: Found at index 6, Operations = 1
+Linear Search: Found at position 1, Comparisons = 1
+
+Key: 525
+Hashing: Found at index 8, Operations = 1
+Linear Search: Found at position 5, Comparisons = 5
+
+Key: 840
+Hashing: Found at index 4, Operations = 1
+Linear Search: Found at position 8, Comparisons = 8
+
+Key: 999
+Hashing: Not Found, Operations = 1
+Linear Search: Not Found, Comparisons = 8
